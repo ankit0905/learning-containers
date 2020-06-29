@@ -1,0 +1,17 @@
+version: '2'
+services:
+    web:
+        build: .
+        command: flask run --host=0.0.0.0 --port=5000
+        ports:
+            - 8000:5000
+        environment:
+            - FLASK_APP=app.py
+    cache:
+        image: redis
+        command: redis-server --appendonly yes
+        volumes:
+            - redis_data:/data
+volumes:
+    flask_data:
+    redis_data:
